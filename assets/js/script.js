@@ -271,9 +271,9 @@ var saveTasks = function()
 var loadTasks = function()
 {
     //get tasks from local storage
-    tasks = localStorage.getItem("tasks", tasks);
-    console.log(tasks);
-    if(tasks === null)
+    tasks = localStorage.getItem("tasks");
+    
+    if(!tasks)
     {
         tasks = [];
         return false;
@@ -282,7 +282,7 @@ var loadTasks = function()
     //convert tasks from string format back into an array
     tasks = JSON.parse(tasks);
 
-    //iterate through a tasks array and create task elements on page
+    // iterate through a tasks array and create task elements on page
     for(var i = 0; i < tasks.length; i++)
     {
         tasks[i].id = taskIdCounter;
@@ -296,9 +296,9 @@ var loadTasks = function()
         listItemEl.appendChild(taskInfoEl);
 
         var taskActionsEl = createTaskActions(tasks[i].id);
-        listItemEl.appendChild(taskActionsEl);
+         listItemEl.appendChild(taskActionsEl);
 
-        if(tasks[i].status === "to do")
+     if(tasks[i].status === "to do")
         {
             listItemEl.querySelector("select[name='status-change']").selectedIndex = 0;
             tasksToDoEl.appendChild(listItemEl);
